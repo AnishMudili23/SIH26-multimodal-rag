@@ -14,6 +14,14 @@ no network** once the models are cached: retrieval, generation, all of it.
   [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - **Session-by-session build log:** [`PROGRESS.md`](PROGRESS.md).
 
+## Technical overview video
+
+A walkthrough of the architecture and pipeline:
+
+https://github.com/AnishMudili23/SIH26-multimodal-rag/raw/main/docs/technical-overview.mp4
+
+(If the player doesn't load inline, [download the video](docs/technical-overview.mp4).)
+
 ---
 
 ## What it does
