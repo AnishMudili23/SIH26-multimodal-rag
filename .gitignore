@@ -1,0 +1,36 @@
+# Environment / weights / caches — recreated locally, never shared (see SETUP.md)
+venv/
+models/
+whisper/
+hf/
+ollama/
+pipcache/
+tmp/
+.model_cache/
+
+# Machine-local config
+env.local.ps1
+
+# Built vector index — rebuilt by `python -m rag.ingest.corpus --src data/raw/ami --reset`
+data/chroma/
+
+# Demo corpus — downloaded on demand by `python -m rag.ingest.manifest`
+# (AMI Meeting Corpus, CC BY 4.0). Big + reproducible, so not committed.
+data/raw/
+data/corpus_manifest*.csv
+
+# HF Space demo media — 113 MB of reproducible AMI corpus; the Space is
+# deployed separately (with Git LFS), so keep it out of the GitHub repo.
+deploy/hf-space/data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Scratch
+_*.py
+*.tmp
+
+# Gradio share artifacts
+.gradio/

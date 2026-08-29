@@ -1,0 +1,97 @@
+# =============================================================================
+#  Offline Multimodal RAG  —  SIH 2026 / PS 25231 (NTRO)
+#  Full dependency list.  `pip install -r requirements.txt` covers the
+#  pip-installable packages; the 4 marked steps below need doing by hand
+#  (torch's CUDA build, ImageBind, NLTK data, the Ollama model).
+#  See docs/SETUP.md for the machine-by-machine walkthrough.
+# =============================================================================
+#
+#  ---------------------------------------------------------------------------
+#  0.  SYSTEM PREREQUISITES  (install these first, they are not Python packages)
+#  ---------------------------------------------------------------------------
+#    Python 3.11              python.org            3.12/3.13 fight some ML wheels; 3.11 is tested
+#    NVIDIA GPU + driver      recent, CUDA 12.x     6 GB VRAM is enough (RTX 3050); CPU works but slow
+#    Tesseract OCR            winget install UB-Mannheim.TesseractOCR   |  apt install tesseract-ocr
+#    Ollama                   winget install Ollama.Ollama              |  curl -fsSL https://ollama.com/install.sh | sh
+#    antiword                 bundled with Git for Windows              |  apt install antiword
+#                             (only for the AMI corpus builder — reads the .doc minutes)
+#    ffmpeg      (optional)   winget install Gyan.FFmpeg                |  apt install ffmpeg
+#                             (only needed for non-WAV audio: mp3 / m4a)
+#
+#  ---------------------------------------------------------------------------
+#  1.  PyTorch  —  install FIRST, matched to your CUDA, from the pytorch index
+#  ---------------------------------------------------------------------------
+#    pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
+#        --index-url https://download.pytorch.org/whl/cu124
+#    (cu124 build works on driver 12.x+.  CPU-only: drop the --index-url.)
+#
+#  ---------------------------------------------------------------------------
+#  2.  then:  pip install -r requirements.txt      (everything in section A below)
+#  ---------------------------------------------------------------------------
+#
+#  ---------------------------------------------------------------------------
+#  3.  ImageBind  —  NOT on PyPI.  Install without its deps (they drag in
+#      cartopy / decord which fail to build on Windows and aren't needed):
+#  ---------------------------------------------------------------------------
+#    pip install --no-deps git+https://github.com/facebookresearch/pytorchvideo.git
+#    pip install --no-deps git+https://github.com/facebookresearch/ImageBind.git
+#    (the timm / ftfy / regex / einops / iopath it needs are in section A)
+#
+#  ---------------------------------------------------------------------------
+#  4.  post-install one-offs
+#  ---------------------------------------------------------------------------
+#    python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab')"
+#    ollama pull qwen2.5:3b-instruct        # ~1.9 GB, the local answer model
+#
+#  First run downloads the ImageBind checkpoint (~4.5 GB) and Whisper small
+#  (~460 MB) once, then everything is offline.
+#
+# =============================================================================
+#  SECTION A  —  pip-installable packages  (this is what -r installs)
+# =============================================================================
+
+# --- torch (pin only; install via the CUDA index in step 1 above) -----------
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+
+# --- ImageBind's runtime deps (ImageBind itself is step 3) ------------------
+timm>=0.9.0                  # vision backbone blocks
+ftfy>=6.1.1                  # text cleanup in the CLIP tokenizer
+regex>=2023.0.0              # CLIP tokenizer
+einops>=0.7.0                # tensor reshaping in ImageBind
+iopath>=0.1.10               # ImageBind checkpoint / path handling
+
+# --- ingestion: extract text from every format -----------------------------
+python-docx>=1.1.0           # .docx
+pymupdf>=1.24.0              # .pdf text layer  (import as `pymupdf` / `fitz`)
+pytesseract>=0.3.10          # OCR for scanned PDFs + images (needs the Tesseract binary)
+pillow>=10.0.0               # image IO for OCR + the vision embedding
+nltk>=3.8.1                  # sentence-boundary chunking (needs punkt, step 4)
+
+# --- audio ----------------------------------------------------------------
+openai-whisper>=20231117     # speech-to-text for recordings + spoken queries
+soundfile>=0.12.1            # decode WAV to an array (so Whisper needs no ffmpeg for WAV)
+librosa>=0.10.1              # resampling / audio-window slicing
+ffmpeg-python>=0.2.0         # only exercised for non-WAV formats
+
+# --- retrieval ----------------------------------------------------------
+chromadb>=0.5.0              # on-disk vector store, one unified collection
+rank-bm25>=0.2.2             # BM25 keyword search — the lexical half of hybrid retrieval
+numpy>=1.26                  # 2.x is fine
+pandas>=2.1                  # manifest / eval CSV handling
+
+# --- generation -------------------------------------------------------
+ollama>=0.3.0               # Python client for the local Ollama server (runs Qwen2.5)
+
+# --- serving + UI ----------------------------------------------------
+fastapi>=0.110              # backend/server.py — the RAG pipeline runs in its own process
+uvicorn>=0.29               # ASGI server for that backend
+httpx>=0.27                 # desktop/api.py — the desktop app's HTTP client (SSE streaming)
+PySide6>=6.7                # desktop/ — the primary UI (native window)
+gradio>=5.0                 # web/app.py — the browser UI (fallback + the shareable demo)
+requests>=2.31
+
+# --- the AMI corpus builder (rag/ingest/manifest.py) uses only the Python
+#     standard library to download + parse.  It needs the `antiword` binary
+#     (section 0) but no extra pip package.
