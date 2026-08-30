@@ -1,10 +1,19 @@
-# Offline Multimodal RAG — SIH 2026 · PS 25231 (NTRO)
+# 🔍 Offline Multimodal RAG — SIH 2026 · PS 25231 (NTRO)
 
 Ask one plain-language question and get a **grounded, cited answer** drawn from
 **documents, images and audio recordings at once** — with every citation
 resolving to the exact page, slide, or audio second it came from, and an
 explicit refusal when the corpus can't answer. Everything runs **locally with
 no network** once the models are cached: retrieval, generation, all of it.
+
+![Inference](https://img.shields.io/badge/Inference-100%25%20Offline-2ea44f)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Embeddings](https://img.shields.io/badge/Embeddings-ImageBind%201024--d-orange)
+![Vector store](https://img.shields.io/badge/Vector%20store-Chroma-5636d3)
+![LLM](https://img.shields.io/badge/LLM-Qwen2.5%203B%20local-black)
+![API](https://img.shields.io/badge/API-FastAPI-009688)
+![Desktop](https://img.shields.io/badge/Desktop-PySide6-41cd52)
+![SIH 2026](https://img.shields.io/badge/SIH%202026-PS%2025231-ff6f00)
 
 - **Problem statement:** design an offline multimodal RAG system that ingests,
   indexes, and queries DOC / PDF / images / voice recordings in one unified
@@ -14,7 +23,7 @@ no network** once the models are cached: retrieval, generation, all of it.
   [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - **Session-by-session build log:** [`PROGRESS.md`](PROGRESS.md).
 
-## Technical overview video
+## 🎥 Technical overview video
 
 A walkthrough of the architecture and pipeline:
 
@@ -24,7 +33,7 @@ https://github.com/AnishMudili23/SIH26-multimodal-rag/raw/main/docs/technical-ov
 
 ---
 
-## What it does
+## ✨ What it does
 
 | Capability | How |
 |---|---|
@@ -38,7 +47,7 @@ https://github.com/AnishMudili23/SIH26-multimodal-rag/raw/main/docs/technical-ov
 
 ---
 
-## How it works
+## 🧠 How it works
 
 ```
 INGESTION   raw files ─▶ extract / OCR / transcribe ─▶ chunk (≤60 tok)
@@ -73,7 +82,7 @@ Key decisions (details in `docs/ARCHITECTURE.md`):
 
 ---
 
-## Repo layout
+## 📁 Repo layout
 
 ```
 rag/                     core library — import as `from rag... import ...`
@@ -108,7 +117,7 @@ data/                     raw/ami/  +  corpus_manifest.csv  +  chroma/   (gitign
 
 ---
 
-## Quick start
+## 🚀 Quick start
 
 Full machine-by-machine setup is in **[`docs/SETUP.md`](docs/SETUP.md)** and the
 dependency list with every step is in **[`requirements.txt`](requirements.txt)**.
@@ -155,7 +164,7 @@ default) so they're visible next to the code.
 
 ---
 
-## Everything you can run
+## ⚡ Everything you can run
 
 All entry points go through `run.ps1` (it activates the env, ensures Ollama is
 up, then runs the target):
@@ -180,7 +189,7 @@ Direct module invocations (what `run.ps1` calls under the hood):
 
 ---
 
-## Managing the corpus
+## 📚 Managing the corpus
 
 **Rebuild / extend the AMI demo corpus:**
 
@@ -206,7 +215,7 @@ button, which ingests without a full rebuild).
 
 ---
 
-## Evaluation
+## 📊 Evaluation
 
 ```powershell
 python scripts\evaluate.py --qrels data\corpus_manifest_qrels.csv
@@ -218,7 +227,7 @@ Recall@5 = 0.96; an AMI dev-query set is a to-do (see `docs/ROADMAP.md` §4).
 
 ---
 
-## Sharing a demo
+## 🔗 Sharing a demo
 
 - **Temporary link** — run the full system on your GPU and tunnel it:
   ```powershell
@@ -232,7 +241,7 @@ Recall@5 = 0.96; an AMI dev-query set is a to-do (see `docs/ROADMAP.md` §4).
 
 ---
 
-## Hard constraints — do not violate these
+## 🚧 Hard constraints — do not violate these
 
 - **Offline at inference.** No external API calls once running. Weights are
   downloaded/cached ahead of time; inference works with the network cable out.
@@ -244,7 +253,7 @@ Recall@5 = 0.96; an AMI dev-query set is a to-do (see `docs/ROADMAP.md` §4).
 
 ---
 
-## Documentation
+## 📖 Documentation
 
 | File | What's in it |
 |---|---|
@@ -257,8 +266,12 @@ Recall@5 = 0.96; an AMI dev-query set is a to-do (see `docs/ROADMAP.md` §4).
 
 ---
 
-## Demo corpus — attribution
+## 📝 Demo corpus — attribution
 
 The demo corpus is the **AMI Meeting Corpus** (meetings ES2002a, ES2002b),
 <http://groups.inf.ed.ac.uk/ami/corpus/>, licensed **CC BY 4.0**.
 J. Carletta et al., *"The AMI Meeting Corpus"*, 2005.
+
+---
+
+<p align="center">Built for <b>Smart India Hackathon 2026</b> · Problem Statement 25231 (NTRO)</p>
