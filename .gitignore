@@ -34,3 +34,6 @@ _*.py
 
 # Gradio share artifacts
 .gradio/
+
+# local dev log — not part of the submission
+PROGRESS.md

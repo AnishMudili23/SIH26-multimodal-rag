@@ -1,8 +1,6 @@
 # ROADMAP — Multimodal RAG
 
 Phased task list. Work top to bottom — each phase unblocks the next.
-Update `PROGRESS.md` at the end of every session regardless of which phase
-is active (see root `CLAUDE.md`).
 
 ## Phase 0 — Ingestion pipeline (current blocker, do this first)
 
@@ -14,7 +12,7 @@ Nothing downstream can be tested against real data until this exists.
 > Tesseract, Ollama+qwen2.5:3b). **Corpus source is being migrated** from the
 > MS MARCO + self-created-assets plan to the **AMI Meeting Corpus** (real
 > time-aligned audio / transcript / slides / minutes for the same meetings) —
-> see the migration entry in `PROGRESS.md` and the rewritten Phase 2 below.
+> see the rewritten Phase 2 below.
 > Recall@5 = 0.96 was measured on the old MS MARCO corpus; a new number
 > against AMI transcript retrieval is pending. **Run `. .\env.ps1` before any
 > python.**
@@ -59,7 +57,7 @@ Corpus gives genuinely simultaneous, same-content audio / transcript / slides
 / documents for the same meetings — the exact thing the PS's cross-format
 linking claim needs, with no manufactured pairs. License **CC BY 4.0**
 (verified on the official corpus page — attribution only). GovReport also
-dropped. Details: `TECH_STACK.md`, and the migration entry in `PROGRESS.md`.
+dropped. Details: `TECH_STACK.md`.
 
 - [x] Verify AMI license (CC BY 4.0, confirmed 2026-08-29) and that
       audio+transcript+slides all coexist for the target meetings.
@@ -89,7 +87,7 @@ tied to the same meetings as the audio/slides — **step 1 of the DOC/PDF
 decision succeeds, no synthetic content needed.** If a chosen meeting turns
 out to lack usable docs, fall back to real independently-existing PDFs found
 by search (their own honest `doc_id` group), and only generate transcript-
-grounded minutes as a last resort (flag clearly in `PROGRESS.md` if so).
+grounded minutes as a last resort (documented clearly if so).
 
 ## Phase 3 — Flip app.py off mock mode
 

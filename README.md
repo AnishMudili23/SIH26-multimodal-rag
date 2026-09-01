@@ -20,8 +20,7 @@ no network** once the models are cached: retrieval, generation, all of it.
   semantic space, with cross-format links (transcript segment ↔ paragraph ↔
   screenshot). Full text in [`docs/PRD.md`](docs/PRD.md).
 - **Design & the reasoning behind every non-obvious choice:**
-  [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
-- **Session-by-session build log:** [`PROGRESS.md`](PROGRESS.md).
+  [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 
 ## 🎥 Technical overview video
 
@@ -262,7 +261,6 @@ Recall@5 = 0.96; an AMI dev-query set is a to-do (see `docs/ROADMAP.md` §4).
 | [`docs/TECH_STACK.md`](docs/TECH_STACK.md) | model/library choices, the VRAM budget |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | phased task list with checkboxes |
 | [`docs/SETUP.md`](docs/SETUP.md) | install walkthrough for a fresh machine |
-| [`PROGRESS.md`](PROGRESS.md) | append-only session log — read the last entry to see where work stopped |
 
 ---
 

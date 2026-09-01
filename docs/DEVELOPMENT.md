@@ -1,7 +1,7 @@
-# [CLAUDE.md](http://CLAUDE.md)
+# Development notes
 
-This file provides guidance to Claude Code when working in this repository.
-Read this first, every session, before making changes.
+Orientation for anyone working in this repo: the overview, what to read
+first, the layout, and the constraints that must not be broken.
 
 ## Project overview
 
@@ -12,10 +12,8 @@ via a local LLM. Fully offline at inference time.
 
 ## Read these before doing anything else
 
-- `PROGRESS.md` (repo root) — the session log. Read the last entry first; it
-  says exactly where work stopped and what's next.
 - `docs/PRD.md` — what we're building and why; the actual PS requirements and
-what "success" means for judges.
+what "success" means.
 - `docs/ARCHITECTURE.md` — the full pipeline design and the reasoning behind
 every non-obvious decision (unified embedding space, chunk size, merge
 strategy, citation contract). If a design choice looks arbitrary, it

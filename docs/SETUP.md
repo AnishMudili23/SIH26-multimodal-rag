@@ -4,7 +4,7 @@ Offline multimodal RAG (SIH #25231). Windows + NVIDIA GPU assumed (the target
 demo machine is a 6 GB RTX 3050 laptop). Linux/WSL works too and is smoother
 for the ML stack — see the note at the end.
 
-Read `README.md` then `CLAUDE.md` for the project overview and repo layout,
+Read `README.md` then `docs/DEVELOPMENT.md` for the project overview and repo layout,
 then this.
 
 ---
@@ -12,7 +12,7 @@ then this.
 ## 0. What's in this zip / what's not
 
 **Included:** all source (`rag/`, `backend/`, `desktop/`, `web/`, `scripts/`),
-the design docs (`docs/`, `README.md`, `CLAUDE.md`, `PROGRESS.md`),
+the design docs (`docs/`, `README.md`),
 `requirements.txt`, `env.ps1` / `run.ps1`, and the **full demo corpus** —
 25 MS MARCO passages + 12 generated images + 6 briefing-call WAVs
 (`data/raw/` + `data/corpus_manifest*.csv`).
@@ -134,7 +134,7 @@ python scripts\evaluate.py                             # once AMI qrels exist
 `python -m rag.ingest.manifest --meetings ES2002a ES2002b ES2003a`.
 
 The earlier MS MARCO + synthetic-asset corpus (`scripts/make_demo_assets.py`,
-`data/raw/{msmarco,images,audio}`) is superseded — see `PROGRESS.md`.
+`data/raw/{msmarco,images,audio}`) is superseded.
 
 ---
 
@@ -162,13 +162,12 @@ nvidia-smi                            # confirm it's clear, then relaunch
 
 ## 7. Where the work stands
 
-See `docs/ROADMAP.md` (checkboxes) and `PROGRESS.md` (full history). Short
+See `docs/ROADMAP.md` (checkboxes). Short
 version: **text + image + audio retrieval and grounded cited generation all
 work offline, end-to-end.** The desktop app (PySide6) + separate FastAPI
 backend are built and stable. A grounding gate rejects out-of-corpus questions
 instead of hallucinating. Open items are roadmap perf tuning (faster-whisper,
-cross-encoder rerank, a smaller/faster model) — see the latest `PROGRESS.md`
-entry.
+cross-encoder rerank, a smaller/faster model).
 
 ---
 

@@ -31,7 +31,7 @@ is comfortable too.
 ## Reference module design
 
 > **Superseded.** The system is built. For the real layout see `README.md`
-> and `CLAUDE.md`; for what changed each session see `PROGRESS.md`. Module
+> and `docs/DEVELOPMENT.md`. Module
 > map: `query_pipeline.py` → `rag/retrieval/pipeline.py`, `generation.py` →
 > `rag/generation/answer.py`, `app.py` → `web/app.py`,
 > `build_corpus_manifest.py` → `rag/ingest/manifest.py`, `ingest.py` →
